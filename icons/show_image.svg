@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" version="1.1">
+
+ <metadata id="metadata90">image/svg+xmlGnome Symbolic Icon Theme</metadata>
+ <title id="title9167">Gnome Symbolic Icon Theme</title>
+ <g class="layer">
+  <title>Layer 1</title>
+  <path d="m31.1,16.44a14.98,14.98 0 1 1 -29.95,0a14.98,14.98 0 1 1 29.95,0z" fill="#d3d7cf" id="path3039" stroke="#46443f" stroke-miterlimit="4" stroke-width="2"/>
+  <text fill="#000000" font-family="Sans" font-size="40px" font-style="normal" font-weight="normal" id="text4369" letter-spacing="0px" word-spacing="0px" x="-5.8" xml:space="preserve" y="10.39"/>
+  <circle cx="13.47" cy="13.55" fill="none" id="svg_27" r="7.33" stroke="#46443f" transform="matrix(1 0 0 1 0 0)"/>
+  <line fill="none" id="svg_28" stroke="#46443f" stroke-width="2" transform="rotate(-6.58194 21.8973 22.6986)" x1="18.99" x2="24.81" y1="18.66" y2="26.74"/>
+  <rect fill="#ff7f00" height="2.95" id="svg_29" stroke="#46443f" transform="matrix(1 0 0 1 0 0)" width="9.93" x="8.3" y="12.42"/>
+  <circle cx="9.74" cy="13.93" fill="#d3d7cf" id="svg_30" r="0.07" stroke="#46443f" transform="matrix(1 0 0 1 0 0)"/>
+  <path d="m11.25,13.86l5.53,0.04l-5.53,-0.04z" fill="none" id="svg_34" stroke="#46443f" transform="matrix(1 0 0 1 0 0)"/>
+ </g>
+</svg>

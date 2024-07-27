@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" version="1.1">
+
+ <metadata id="metadata90">image/svg+xmlGnome Symbolic Icon Theme</metadata>
+ <title id="title9167">Gnome Symbolic Icon Theme</title>
+ <g class="layer">
+  <title>Layer 1</title>
+  <path d="m30.99,16.01a14.98,14.98 0 1 1 -29.95,0a14.98,14.98 0 1 1 29.95,0z" fill="#d3d7cf" id="path3039" stroke="#46443f" stroke-miterlimit="4" stroke-width="2" transform="matrix(1 0 0 1 0 0)"/>
+  <text fill="#000000" font-family="Sans" font-size="40px" font-style="normal" font-weight="normal" id="text4369" letter-spacing="0px" word-spacing="0px" x="-5.8" xml:space="preserve" y="10.39"/>
+  <rect fill="#ff7f00" height="8.2" id="svg_1" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="8.2" x="11.76" y="12.2"/>
+  <rect fill="none" height="12.6" id="svg_2" rx="2" ry="2" stroke="#4c4c4c" width="12.6" x="9.56" y="10"/>
+  <line fill="none" id="svg_3" stroke="#4c4c4c" x1="9.16" x2="6.56" y1="13.3" y2="13.3"/>
+  <line fill="none" id="svg_4" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" x1="9.16" x2="6.56" y1="16.3" y2="16.3"/>
+  <line fill="none" id="svg_5" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" x1="9.16" x2="6.56" y1="19.3" y2="19.3"/>
+  <line fill="none" id="svg_6" points="null" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" x1="12.38" x2="12.34" y1="9.6" y2="7"/>
+  <line fill="none" id="svg_7" points="null" stroke="#4c4c4c" x1="15.57" x2="15.55" y1="9.6" y2="7"/>
+  <line fill="none" id="svg_8" stroke="#4c4c4c" transform="rotate(88.5498 18.96 8.3)" x1="20.26" x2="17.66" y1="8.3" y2="8.3"/>
+  <line fill="none" id="svg_9" stroke="#4c4c4c" x1="25.26" x2="22.66" y1="13.4" y2="13.4"/>
+  <line fill="none" id="svg_10" stroke="#4c4c4c" x1="25.26" x2="22.66" y1="16.4" y2="16.4"/>
+  <line fill="none" id="svg_11" stroke="#4c4c4c" x1="25.26" x2="22.66" y1="19.5" y2="19.5"/>
+  <line fill="none" id="svg_12" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0) rotate(90 12.46 24.3)" x1="13.76" x2="11.16" y1="24.3" y2="24.3"/>
+  <line fill="none" id="svg_13" stroke="#4c4c4c" transform="rotate(90 15.96 24.4)" x1="17.26" x2="14.66" y1="24.4" y2="24.4"/>
+  <line fill="none" id="svg_14" points="null" stroke="#4c4c4c" x1="19.46" x2="19.46" y1="25.6" y2="23"/>
+ </g>
+</svg>

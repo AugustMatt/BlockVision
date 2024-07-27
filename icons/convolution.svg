@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" version="1.1">
+
+ <metadata id="metadata90">image/svg+xmlGnome Symbolic Icon Theme</metadata>
+ <title id="title9167">Gnome Symbolic Icon Theme</title>
+ <g class="layer">
+  <title>Layer 1</title>
+  <path d="m30.89,15.81a14.98,14.98 0 1 1 -29.95,0a14.98,14.98 0 1 1 29.95,0z" fill="#d3d7cf" id="path3039" stroke="#46443f" stroke-miterlimit="4" stroke-width="2"/>
+  <text fill="#000000" font-family="Sans" font-size="40px" font-style="normal" font-weight="normal" id="text4369" letter-spacing="0px" word-spacing="0px" x="-5.8" xml:space="preserve" y="10.39"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_29" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="7.66" y="9.2"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_31" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="9.97" y="9.2"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_32" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="12.26" y="9.2"/>
+  <rect fill="none" height="2.3" id="svg_33" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="14.57" y="9.2"/>
+  <rect fill="none" height="2.3" id="svg_34" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="16.87" y="9.2"/>
+  <rect fill="none" height="2.3" id="svg_35" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="19.17" y="9.2"/>
+  <rect fill="none" height="2.3" id="svg_36" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="21.48" y="9.2"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_37" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="7.65" y="11.51"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_38" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="9.96" y="11.51"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_39" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="12.26" y="11.51"/>
+  <rect fill="none" height="2.3" id="svg_40" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="14.57" y="11.51"/>
+  <rect fill="none" height="2.3" id="svg_41" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="16.87" y="11.51"/>
+  <rect fill="none" height="2.3" id="svg_42" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="19.17" y="11.51"/>
+  <rect fill="none" height="2.3" id="svg_43" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="21.48" y="11.51"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_44" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="7.65" y="13.81"/>
+  <rect fill="none" height="2.3" id="svg_45" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="7.65" y="16.11"/>
+  <rect fill="none" height="2.3" id="svg_46" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="7.65" y="18.42"/>
+  <rect fill="none" height="2.3" id="svg_47" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="7.65" y="20.72"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_48" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="9.96" y="13.81"/>
+  <rect fill="none" height="2.3" id="svg_49" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="9.96" y="16.11"/>
+  <rect fill="none" height="2.3" id="svg_50" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="9.96" y="18.42"/>
+  <rect fill="none" height="2.3" id="svg_51" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="9.96" y="20.72"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_52" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="12.26" y="13.81"/>
+  <rect fill="none" height="2.3" id="svg_53" stroke="#4c4c4c" width="2.3" x="14.57" y="13.81"/>
+  <rect fill="none" height="2.3" id="svg_54" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="16.87" y="13.81"/>
+  <rect fill="none" height="2.3" id="svg_55" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="19.17" y="13.81"/>
+  <rect fill="none" height="2.3" id="svg_56" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="21.48" y="13.81"/>
+  <rect fill="none" height="2.3" id="svg_57" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="12.26" y="16.11"/>
+  <rect fill="none" height="2.3" id="svg_58" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="14.57" y="16.11"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_59" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="16.87" y="16.11"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_60" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="19.17" y="16.11"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_61" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="21.48" y="16.11"/>
+  <rect fill="none" height="2.3" id="svg_62" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="12.26" y="18.42"/>
+  <rect fill="none" height="2.3" id="svg_63" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="14.57" y="18.42"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_65" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="19.17" y="18.42"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_66" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="21.48" y="18.42"/>
+  <rect fill="none" height="2.3" id="svg_67" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="12.26" y="20.72"/>
+  <rect fill="none" height="2.3" id="svg_68" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="14.57" y="20.72"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_69" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="16.87" y="20.72"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_70" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="19.17" y="20.72"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_71" stroke="#4c4c4c" transform="matrix(1 0 0 1 0 0)" width="2.3" x="21.48" y="20.72"/>
+  <rect fill="#ff7f00" height="2.3" id="svg_107" stroke="#4c4c4c" width="2.3" x="16.87" y="18.42"/>
+  <line fill="none" id="svg_121" stroke="#46443f" transform="matrix(1 0 0 1 0 0)" x1="13.1" x2="18.49" y1="7.56" y2="7.56"/>
+  <line fill="none" id="svg_122" points="null" stroke="#46443f" transform="matrix(1 0 0 1 0 0)" x1="15.95" x2="18.21" y1="5.86" y2="7.52"/>
+  <line fill="none" id="svg_123" points="null" stroke="#46443f" transform="matrix(1 0 0 1 0 0)" x1="5.98" x2="5.98" y1="14.65" y2="20.04"/>
+  <line fill="none" id="svg_125" points="null" stroke="#46443f" transform="matrix(1 0 0 1 0 0) matrix(0.714824 -0.965068 0.670626 1.02867 -10.7931 3.91491)" x1="4.83" x2="4.83" y1="17.55" y2="19.69"/>
+ </g>
+</svg>
