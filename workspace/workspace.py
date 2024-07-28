@@ -1,10 +1,24 @@
-from PyQt5.QtWidgets import QGraphicsScene, QGraphicsLineItem, QDialog, QVBoxLayout, QLabel, QComboBox, QPushButton, QLineEdit, QGridLayout
+# Classe Workspace (herdando de QGraphicsScene):
+
+# Responsabilidade Principal: 
+#   Gerenciar e organizar os itens dentro da cena (dele mesmo), como blocos funcionais e conexões entre eles.
+
+# Responsabilidades:
+#   Gerenciar os itens na cena, como blocos e conexões.
+#   Lidar com eventos específicos da cena, como cliques e movimentações.
+#   Fornecer métodos para adicionar, remover e conectar itens.
+
+# Funções Típicas: 
+#   Adicionar, remover e conectar itens; 
+#   Gerenciar (lidar) eventos dentro da cena, como cliques e arrastos.
+
+from PyQt5.QtWidgets import QGraphicsScene, QGraphicsLineItem
 from PyQt5.QtCore import Qt, QLineF
 from PyQt5.QtGui import QTransform
-from circuititem import CircuitItem  # Assegure-se de criar uma classe similar em Python
-from connector import Connector  # Assegure-se de criar uma classe similar em Python
+from nodes.node import Node
+from nodes.connector import Connector
 
-class CircuitScene(QGraphicsScene):
+class Workspace(QGraphicsScene):
 
     def __init__(self, parent=None):
 
@@ -70,8 +84,8 @@ class CircuitScene(QGraphicsScene):
 
             # Dado que uma linha so tem um circuit item de entrada e um de saida
             # Filtramos apenas os circuit itens
-            start_item = next((item for item in start_items if isinstance(item, CircuitItem)), None)
-            end_item = next((item for item in end_items if isinstance(item, CircuitItem)), None)
+            start_item = next((item for item in start_items if isinstance(item, Node)), None)
+            end_item = next((item for item in end_items if isinstance(item, Node)), None)
 
             # Apaga a linha fantasma
             self.removeItem(self.line)
@@ -96,17 +110,17 @@ class CircuitScene(QGraphicsScene):
                 # Verificações específicas por tipo do bloco
 
                 # O bloco de exibir imagem não pode servir de entrada
-                if start_item.getType() == "show_image":
+                if start_item.getType() == "Display Image":
                     print("Bloco de exibir imagem não pode ser uma entrada")
                     return
                 
                 # O bloco para carregar imagem não pode conter uma entrada
-                elif end_item.getType() == "load_image":
+                elif end_item.getType() == "Load Image":
                     print("Bloco de carregar imagem não pode conter entradas")
                     return
                 
                 # O bloco de exibir imagem so pode conter uma entrada no maximo
-                elif end_item.getType() == "show_image" and len(end_item.getInputConnectors()) >= 1:
+                elif end_item.getType() == "Display Image" and len(end_item.getInputConnectors()) >= 1:
                     print("Bloco de exibir imagem so pode conter uma entrada no maximo")
                     return
                 
@@ -130,8 +144,8 @@ class CircuitScene(QGraphicsScene):
 
     # Cria uma instancia de circuititem com base no texto (s) do action clicado
     # Note que o metodo addItem vem da classe pai QGraphicsScene via herança
-    def add(self, s):
-        item = CircuitItem(s)
+    def add(self, node_type, icon_path):
+        item = Node(node_type, icon_path)
         self.addItem(item)
 
         # Deseleciona todos os blocos quando o modo é trocado
@@ -162,7 +176,7 @@ class CircuitScene(QGraphicsScene):
         myitems = self.items()
         for count, item in enumerate(myitems):
             print(f"count = {count}")
-            if isinstance(item, CircuitItem):
+            if isinstance(item, Node):
                 print(f"item {item.getType()}")
 
     # Metodo que verifica se dois objetos estão colidindo

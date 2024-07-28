@@ -1,16 +1,31 @@
+# Classe Viewer (herdando de QGraphicsView):
+
+# Responsabilidade Principal: 
+#   Exibir o conteúdo da cena (Workspace) e fornecer a interface para interação com a cena.
+
+# Responsabilidades:
+#   Exibir o QGraphicsScene (o workspace).
+#   Gerenciar a interface do usuário para interações visuais, como zoom e rotação.
+#   "ENCAMINHAR" eventos do usuário para o workspace.
+
+# Funções Típicas: 
+#   Atualizar a visualização da cena, 
+#   lidar com a rotação e o zoom, e 
+#   "RESPONDER" (não é lidar) a interações do usuário como cliques e arrastos.
+
 from PyQt5.QtWidgets import QGraphicsView, QFileDialog, QDialog, QVBoxLayout, QLabel, QComboBox, QPushButton, QLineEdit, QGridLayout
 from PyQt5.QtGui import QPainter, QBrush, QColor
 from PyQt5.QtCore import Qt
 import cv2
 import numpy as np
-from circuitscene import CircuitScene
-from circuititem import CircuitItem
+from workspace.workspace import Workspace
+from nodes.node import Node
 
-class CircuitViewer(QGraphicsView):
+class Viewer(QGraphicsView):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.scene = CircuitScene(self)
+        self.scene = Workspace(self)
         self.setScene(self.scene)
         self.setAlignment(Qt.AlignLeft | Qt.AlignTop)
         self.scene.setBackgroundBrush(QBrush(QColor(200, 200, 200), Qt.SolidPattern))
@@ -21,8 +36,8 @@ class CircuitViewer(QGraphicsView):
         # Adicione lógica adicional se necessário
 
     # Adiciona o bloco funcional a cena utilizando o metodo add da classe circuitscene
-    def addItem(self, action):
-        self.scene.add(action.text())
+    def addItem(self, action, icon_path):
+        self.scene.add(action.text(), icon_path)
 
     # Ajusta o modo conforme necessário para definir o modo
     def setMode(self, action):
@@ -48,7 +63,7 @@ class CircuitViewer(QGraphicsView):
             selected_item = selected_items_list[0]
 
             # Verifica se é do tipo circuit item, caso contrario o substitui por None
-            circuit_item = selected_item if isinstance(selected_item, CircuitItem) else None
+            circuit_item = selected_item if isinstance(selected_item, Node) else None
 
             # Caso exista
             if circuit_item:
@@ -57,15 +72,15 @@ class CircuitViewer(QGraphicsView):
                 item_type = circuit_item.getType()
 
                 # Se for o bloco de carregar imagem
-                if item_type == "load_image":
+                if item_type == "Load Image":
                     self.seletorDeImagem(circuit_item)
 
                 # Se for o bloco de exibir imagem
-                elif item_type == "show_image":
+                elif item_type == "Display Image":
                     self.exibirImagem(circuit_item)
 
                 # Se for o bloco de convolução
-                elif item_type == "convolution":
+                elif item_type == "Convolution":
                     self.aplicarConvolucao(circuit_item)
 
                 else:
@@ -150,7 +165,7 @@ class CircuitViewer(QGraphicsView):
             kernel_item = input_connectors[1].getSrc()
 
             # Verifica se os itens estão invertidos e os corrige
-            if load_item_image.getType() == "convolution_kernel":
+            if load_item_image.getType() == "Convolution Kernel":
                 load_item_image, kernel_item = kernel_item, load_item_image
 
             # Se os itens forem válidos
@@ -190,7 +205,7 @@ class CircuitViewer(QGraphicsView):
             selected_item = selected_items_list[0]
 
             # Verifica se é do tipo circuit item, caso contrario o substitui por None
-            circuit_item = selected_item if isinstance(selected_item, CircuitItem) else None
+            circuit_item = selected_item if isinstance(selected_item, Node) else None
 
             # Caso exista
             if circuit_item:
@@ -199,11 +214,11 @@ class CircuitViewer(QGraphicsView):
                 item_type = circuit_item.getType()
 
                 # Se for o bloco de carregar imagem
-                if item_type == "load_image":
+                if item_type == "Load Image":
                     self.createCollorPatternSelectionWindow(selected_item)
 
                 # Se for o bloco de kernel de convolução
-                elif item_type == "convolution_kernel":
+                elif item_type == "Convolution Kernel":
                     self.createConvolutionMatrixWindow(selected_item)
 
                 else:

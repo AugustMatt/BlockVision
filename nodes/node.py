@@ -12,30 +12,19 @@ from PyQt5.QtCore import QRectF, QPointF, Qt, QSizeF
 from PyQt5.QtSvg import QSvgRenderer
 import numpy as np  # Para manipulação de matrizes
 
-class CircuitItem(QGraphicsItem):
+class Node(QGraphicsItem):
 
-    def __init__(self, item_type):
+    def __init__(self, item_type, image_path):
         super().__init__()
 
         # Vai ser usando como retorno em alguns metodos
         self.item_type = item_type
 
-        # Nome do bloco
-        # É o nome que será renderizado abaixo do bloco
-        if item_type == "load_image":
-            self.item_name = "Carregar Imagem"
-        elif item_type == "show_image":
-            self.item_name = "Exibir Imagem"
-        elif item_type == "convolution_kernel":
-            self.item_name = "Kernel Conv"
-        elif item_type == "convolution":
-            self.item_name = "Convolução"
-        else:
-            raise("Tipo do bloco não identificado")
+        # Nome do bloco. É o nome que será renderizado abaixo do bloco
+        self.item_name = item_type
 
-        # Icone do bloco funcional
-        # Como o tipo do bloco tem o mesmo nome do arquivo .svg (ver mainwindow.py) é possivel utilizar esse caminho dinamico
-        self.svg_renderer = QSvgRenderer(f"icons/{item_type}.svg")
+        # Imagem do bloco funcional
+        self.svg_renderer = QSvgRenderer(image_path)
         
         # Tamanho da imagem do bloco funcional
         self.width = 85
