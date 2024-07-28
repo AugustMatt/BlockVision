@@ -172,7 +172,20 @@ class CircuitScene(QGraphicsScene):
             return True
         return False
 
+    # Evento de pressionamento de tecla
+    def keyPressEvent(self, event):
 
+        # Se a tecla delete for pressionada, chama o metodo para deleção de um connector (caso este seja o elemento selecionado)
+        if event.key() == Qt.Key_Delete:
+            self.delete_selected_items()
+
+    def delete_selected_items(self):
+        for item in self.selectedItems():
+            if isinstance(item, Connector):
+                item.remove()
+            else:
+                print('Deleção de blocos ainda não implementada')
+                return
 
 
 

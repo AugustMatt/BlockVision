@@ -116,3 +116,18 @@ class Connector(QGraphicsLineItem):
     # Retorna o objeto (circuit item) de destino da conexão
     def getDst(self):
         return self.dst
+
+    # Adicione métodos para remover o conector
+    def remove(self):
+
+        # Remover o conector das listas de conectores dos itens
+        if self in self.src.output_connectors:
+            self.src.output_connectors.remove(self)
+        if self in self.dst.input_connectors:
+            self.dst.input_connectors.remove(self)
+        
+        # Remover referências aos itens conectados
+        self.src = None
+        self.dst = None
+        # Remover o conector da cena
+        self.scene().removeItem(self)
