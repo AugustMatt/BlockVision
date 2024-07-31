@@ -41,6 +41,34 @@ class Connector(QGraphicsLineItem):
         # Atualiza a posição do conector
         self.updatePosition()
 
+    # Método para desenhar o conector
+    def paint(self, painter, option, widget):
+        
+        # Certifica-se de que a posição está atualizada
+        self.updatePosition()
+
+        # Configura a caneta para desenhar a linha
+        my_pen = QPen(self.line_color)
+
+        # Define a largura da linha
+        my_pen.setWidth(3)
+
+        # Altera a cor da linha se o conector estiver selecionado
+        if self.isSelected():
+            my_pen.setColor(Qt.blue)
+
+        # Define a caneta no pintor
+        painter.setPen(my_pen)
+
+        # Define o pincel no pintor para desenhar o círculo
+        painter.setBrush(self.circle_color)
+
+        # Desenha a linha central
+        painter.drawLine(self.center_line)
+
+         # Desenha o círculo no ponto de borda
+        painter.drawEllipse(self.border_point, self.radius, self.radius)
+
     # Retorna a caixa delimitadora da linha que representa uma conexão
     def boundingRect(self):
 
@@ -80,34 +108,6 @@ class Connector(QGraphicsLineItem):
 
         # Ajusta o ponto final da linha central para ser o ponto de borda calculado
         self.center_line.setP2(self.border_point)
-
-    # Método para desenhar o conector
-    def paint(self, painter, option, widget):
-        
-        # Certifica-se de que a posição está atualizada
-        self.updatePosition()
-
-        # Configura a caneta para desenhar a linha
-        my_pen = QPen(self.line_color)
-
-        # Define a largura da linha
-        my_pen.setWidth(3)
-
-        # Altera a cor da linha se o conector estiver selecionado
-        if self.isSelected():
-            my_pen.setColor(Qt.blue)
-
-        # Define a caneta no pintor
-        painter.setPen(my_pen)
-
-        # Define o pincel no pintor para desenhar o círculo
-        painter.setBrush(self.circle_color)
-
-        # Desenha a linha central
-        painter.drawLine(self.center_line)
-
-         # Desenha o círculo no ponto de borda
-        painter.drawEllipse(self.border_point, self.radius, self.radius)
 
     # Retorna o objeto (circuit item) de origem da conexão
     def getSrc(self):

@@ -16,6 +16,10 @@ from PyQt5.QtWidgets import QGraphicsScene, QGraphicsLineItem
 from PyQt5.QtCore import Qt, QLineF
 from PyQt5.QtGui import QTransform
 from nodes.node import Node
+from nodes.load_image import LoadImage
+from nodes.display_image import DisplayImage
+from nodes.convolution_kernel import ConvolutionKernel
+from nodes.convolution import Convolution
 from nodes.connector import Connector
 
 class Workspace(QGraphicsScene):
@@ -145,8 +149,26 @@ class Workspace(QGraphicsScene):
     # Cria uma instancia de circuititem com base no texto (s) do action clicado
     # Note que o metodo addItem vem da classe pai QGraphicsScene via herança
     def add(self, node_type, icon_path):
-        item = Node(node_type, icon_path)
-        self.addItem(item)
+        
+        # Dicionário para mapear tipos de blocos a suas classes específicas
+        node_classes = {
+            "Load Image": LoadImage,
+            "Display Image": DisplayImage,
+            "Convolution Kernel": ConvolutionKernel,
+            "Convolution": Convolution
+        }
+
+        # Verifica se o tipo de nó está no dicionário
+        if node_type in node_classes:
+            
+            # Cria a instância da classe específica
+            node_class = node_classes[node_type]
+            item = node_class(icon_path)
+            
+            # Adiciona o item à cena
+            self.addItem(item)
+        else:
+            print(f"Tipo de nó desconhecido: {node_type}")
 
         # Deseleciona todos os blocos quando o modo é trocado
         for another_item in self.selectedItems():
@@ -154,7 +176,6 @@ class Workspace(QGraphicsScene):
         item.setSelected(True)
 
     # Troca o modo de operação da cena
-    # É chamada é mainwindow.py
     def setMode(self, s):
 
         # Deseleciona todos os blocos quando o modo é trocado
@@ -200,8 +221,3 @@ class Workspace(QGraphicsScene):
             else:
                 print('Deleção de blocos ainda não implementada')
                 return
-
-
-
-
-            
