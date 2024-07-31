@@ -31,15 +31,15 @@ class MainWindow(QMainWindow):
         self.createActionGroup()
         self.createToolBars()
         self.createCentralWidget()
-        # Barra de status e menu bar podem ser adicionados mais tarde, conforme necessário
+        # Status bar and menu bar can be added later as needed
         # self.createStatusBar()
         # self.createMenuBar()
         self.connectSignals()
 
     def createActions(self):
         """
-        Cria as ações utilizadas nas barras de ferramentas e menus.
-        Estas ações representam operações como criar blocos funcionais e modos de interação.
+        Creates actions used in toolbars and menus.
+        These actions represent operations such as creating functional blocks and interaction modes.
         """
         self.createLoadImageNode = QAction(QIcon('icons/nodes/load_image.svg'), 'Load Image', self)
         self.createDisplayImageNode = QAction(QIcon('icons/nodes/display_image.svg'), 'Display Image', self)
@@ -57,8 +57,8 @@ class MainWindow(QMainWindow):
 
     def createActionGroup(self):
         """
-        Cria um grupo de ações exclusivas para modos de interação.
-        Apenas um modo de interação pode ser selecionado por vez.
+        Creates a group of actions exclusive to interaction modes.
+        Only one interaction mode can be selected at a time.
         """
         self.exclusiveSelectionGroup = QActionGroup(self)
         self.exclusiveSelectionGroup.addAction(self.selectMoveMode)
@@ -66,8 +66,8 @@ class MainWindow(QMainWindow):
 
     def createToolBars(self):
         """
-        Cria e configura as barras de ferramentas da aplicação.
-        Adiciona ações para blocos funcionais e modos de interação.
+        Creates and configures the application's toolbars.
+        Adds actions for functional blocks and interaction modes.
         """
         self.nodesToolBar = QToolBar('Nodes ToolBar', self)
         self.nodesToolBar.addAction(self.createLoadImageNode)
@@ -85,7 +85,7 @@ class MainWindow(QMainWindow):
 
     def createCentralWidget(self):
         """
-        Cria o widget central da janela e adiciona o Viewer para exibir e interagir com o diagrama de blocos.
+        Creates the central widget of the window and adds the Viewer to display and interact with the block diagram.
         """
         self.centralWidget = QWidget(self)
         self.horizontalLayout = QHBoxLayout(self.centralWidget)
@@ -95,23 +95,23 @@ class MainWindow(QMainWindow):
 
     def createStatusBar(self):
         """
-        Cria a barra de status da aplicação. 
-        Pode ser utilizada para exibir informações ou mensagens ao usuário.
+        Creates the application's status bar.
+        Can be used to display information or messages to the user.
         """
         self.statusBar = QStatusBar(self)
         self.setStatusBar(self.statusBar)
 
     def createMenuBar(self):
         """
-        Cria a barra de menu da aplicação.
-        Pode ser utilizada para adicionar menus e itens de menu.
+        Creates the application's menu bar.
+        Can be used to add menus and menu items.
         """
         self.menuBar = QMenuBar(self)
         self.setMenuBar(self.menuBar)
 
     def connectSignals(self):
         """
-        Conecta as ações às funções correspondentes para manipulação dos blocos e modos de interação.
+        Connects actions to their corresponding functions for handling blocks and interaction modes.
         """
         self.createLoadImageNode.triggered.connect(lambda: self.viewer.addItem(self.createLoadImageNode, 'icons/nodes/load_image.svg'))
         self.createDisplayImageNode.triggered.connect(lambda: self.viewer.addItem(self.createDisplayImageNode, 'icons/nodes/display_image.svg'))
@@ -121,5 +121,5 @@ class MainWindow(QMainWindow):
         self.selectMoveMode.triggered.connect(lambda: self.viewer.scene.setMode("POINTER"))
         self.connectMode.triggered.connect(lambda: self.viewer.scene.setMode("LINE"))
 
-        self.actionRun.triggered.connect(lambda: self.viewer.play())
+        self.actionRun.triggered.connect(lambda: self.viewer.run())
         self.actionOptions.triggered.connect(lambda: self.viewer.openOptionsWindow())

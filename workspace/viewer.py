@@ -29,63 +29,34 @@ class Viewer(QGraphicsView):
         self.scene.setBackgroundBrush(QBrush(QColor(200, 200, 200), Qt.SolidPattern))
         self.setRenderHint(QPainter.Antialiasing)
 
-    def mousePressEvent(self, event):
-        super().mousePressEvent(event)
-        # Adicione lógica adicional se necessário
-
-    # Adiciona o bloco funcional a cena utilizando o metodo add da classe circuitscene
     def addItem(self, action, icon_path):
         self.scene.add(action.text(), icon_path)
 
-    # Ajusta o modo de interação conforme necessário
     def setMode(self, action):
         self.scene.setMode(action.text())
 
-    # Executa a funcionalidade do bloco selecionado
-    def play(self):
-
-        # Lista dos elementos selecionados
-        # Espera-se ter somente um (indice 0)
-        selected_items_list = self.scene.selectedItems()
-        
-        # Se existe ao menos um item selecionado
-        if selected_items_list:
-
-            # Adquire esse item
-            selected_item = selected_items_list[0]
-
-            # Verifica se é do tipo circuit item, caso contrario o substitui por None
-            circuit_item = selected_item if isinstance(selected_item, Node) else None
-
-            # Caso exista
-            if circuit_item:
-                circuit_item.run()
-            else:
-                print("Elemento selecionado não é um circuit item")
+    def run(self):
+        circuit_item = self._get_selected_node()
+        if circuit_item:
+            circuit_item.run()
         else:
-            print("Sem elementos selecionados")
+            print("Selected item is not a circuit item or no item selected")
 
-    # Abre a janela de ajustes do bloco funcional selecionado (Se houver)
     def openOptionsWindow(self):
-        
-        # Lista dos elementos selecionados
-        # Espera-se ter somente um (indice 0)
-        selected_items_list = self.scene.selectedItems()
-
-        # Se existe ao menos um item selecionado
-        if selected_items_list:
-
-            # Adquire esse item
-            selected_item = selected_items_list[0]
-
-            # Verifica se é do tipo circuit item, caso contrario o substitui por None
-            circuit_item = selected_item if isinstance(selected_item, Node) else None
-
-            # Caso exista
-            if circuit_item:                
-                circuit_item.optionsWindow()
-            else:
-                print("Elemento selecionado não é um circuit item")
-
+        circuit_item = self._get_selected_node()
+        if circuit_item:
+            circuit_item.optionsWindow()
         else:
-            print("Sem elementos selecionados")
+            print("Selected item is not a circuit item or no item selected")
+
+    def _get_selected_node(self):
+        """
+        Retrieves the selected item from the scene and checks if it is a Node.
+        Returns:
+            Node: The selected Node if valid, otherwise None.
+        """
+        selected_items_list = self.scene.selectedItems()
+        if selected_items_list:
+            selected_item = selected_items_list[0]
+            return selected_item if isinstance(selected_item, Node) else None
+        return None

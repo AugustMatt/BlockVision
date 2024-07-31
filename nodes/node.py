@@ -5,49 +5,52 @@ from PyQt5.QtWidgets import QGraphicsItem
 from PyQt5.QtGui import QPen, QBrush, QPainterPath, QFont
 from PyQt5.QtCore import QRectF, QPointF, Qt
 
+
 class Node(QGraphicsItem):
     
     def __init__(self, item_type):
         super().__init__()
 
-        # Tipo e nome do bloco
-        # O nome sera escrito abaixo do bloco
+        # Type and name of the block
+        # The name will be written below the block
         self.item_type = item_type
         self.item_name = item_type
 
-        # Dimensões em pixels do bloco
+        # Dimensions in pixels of the block
         self.width = 85
         self.height = 85
 
-        # Tamanho da fonte do nome do bloco
+        # Font size for the block name
         self.font = QFont()
         self.font.setPointSize(8)
 
-        # Altura em pixels da caixa de texto do nome do bloco
+        # Height in pixels of the block name text box
         self.text_height_in_pixels = 16
 
-        # Listas com os conectores de entrada e saida que do bloco
+        # Lists of input and output connectors for the block
         self.input_connectors = []
         self.output_connectors = []
 
-        # Faz o bloco ser deslocavel, selecionavel e ...
+        # Makes the block movable, selectable, etc.
         self.setFlag(QGraphicsItem.ItemIsMovable, True)
         self.setFlag(QGraphicsItem.ItemIsSelectable, True)
         self.setFlag(QGraphicsItem.ItemSendsGeometryChanges, True)
 
-    # Metodo para renderizar o nome do bloco (abaixo dele)
     def paint(self, painter, option, widget):
-
+        """
+        Renders the block's name (below it).
+        Draws the block border if selected.
+        """
         painter.setPen(QPen(Qt.black))
         painter.setBrush(QBrush(Qt.NoBrush))
         painter.setFont(self.font)
         
-        # Desenha o texto abaixo do bloco
+        # Draw the text below the block
         text_rect = QRectF(0, 0, self.width, self.height)
         text_rect.setHeight(self.height + self.text_height_in_pixels)
         painter.drawText(text_rect, Qt.AlignBottom | Qt.AlignHCenter, self.item_name)
         
-        # Desenha a borda do bloco se estiver selecionado
+        # Draw the block border if selected
         if self.isSelected():
             painter.setPen(QPen(Qt.blue))
         else:
@@ -57,28 +60,34 @@ class Node(QGraphicsItem):
         painter.drawRect(self.boundingRect())
         self.update()
 
-    # Metodo que executa as funcionalidades do bloco funcional
-    # Alguns blocos funcionais terão seus proprios metodos run (polimorfismo)
-    # Para os que não tiverem, exibe apenas uma mensagem no terminal
     def run(self):
-        print("Metodo de execução não implementado para esse bloco")
+        """
+        Executes the block's functionalities.
+        Some functional blocks will have their own run methods (polymorphism).
+        For those that do not, just prints a message to the terminal.
+        """
+        print("Run method not implemented for this block")
 
-    # Metodo que cria e renderiza a janela de opções desse bloco
-    # Alguns blocos funcionais terão seus proprios metodos optionsWindow (polimorfismo)
-    # Para os que não tiverem, exibe apenas uma mensagem no terminal
     def optionsWindow(self):
-        print("Janela de configurações não implementada para esse bloco")
+        """
+        Creates and renders the block's options window.
+        Some functional blocks will have their own optionsWindow methods (polymorphism).
+        For those that do not, just prints a message to the terminal.
+        """
+        print("Options window not implemented for this block")
 
-    # Retorna caixa delimitadora do bloco com um acresimo na altura para o texto que representa o nome do blocos
     def boundingRect(self):
+        """
+        Returns the bounding box of the block with additional height for the block's name text.
+        """
         return QRectF(0, 0, self.width, self.height + self.text_height_in_pixels)
 
-    # Metodo executado quando ocorre um deslocamento no bloco
-    # Atualiza a posição dos conectores do bloco
     def itemChange(self, change, value):
-
+        """
+        Called when the block is moved.
+        Updates the position of the block's connectors.
+        """
         if change == QGraphicsItem.ItemPositionChange:
-
             for connector in self.input_connectors:
                 connector.updatePosition()
             
@@ -87,37 +96,64 @@ class Node(QGraphicsItem):
         
         return super().itemChange(change, value)
 
-    # Retorna o ponto central do bloco funcional
-    # Usado pela classe connector
     def center(self):
+        """
+        Returns the center point of the functional block.
+        Used by the Connector class.
+        """
         return QPointF(self.x() + self.width / 2, self.y() + self.height / 2)
 
     def shape(self):
+        """
+        Returns the shape of the block for collision detection.
+        """
         path = QPainterPath()
         path.addRect(self.boundingRect())
         return path
 
-    # Retorna o tipo do bloco funcional
     def getType(self):
+        """
+        Returns the type of the functional block.
+        """
         return self.item_type
 
-    # Adiciona um conector a lista de conectores de entrada do bloco
     def addInputConnector(self, connector):
+        """
+        Adds a connector to the block's list of input connectors.
+        """
         self.input_connectors.append(connector)
 
-    # Adiciona um conector a lista de conectores de saida do bloco
     def addOutputConnector(self, connector):
+        """
+        Adds a connector to the block's list of output connectors.
+        """
         self.output_connectors.append(connector)
 
-    # Retorna a lista de conectores de entrada
     def getInputConnectors(self):
+        """
+        Returns the list of input connectors.
+        """
         return self.input_connectors
 
-    # Remove um conector de entrada especifico da lista de conectores de entrada do bloco
     def removeInputConnector(self, connector):
+        """
+        Removes a specific input connector from the block's list of input connectors.
+        """
         self.input_connectors.remove(connector)
 
-    # Remove um conector de saida especifico da lista de conectores de saida do bloco
     def removeOutputConnector(self, connector):
+        """
+        Removes a specific output connector from the block's list of output connectors.
+        """
         self.output_connectors.remove(connector)
 
+    def remove(self):
+        """
+        Removes a block and all its associated connectors.
+        """
+        # Remove todas as conexões associadas ao bloco
+        for connector in self.input_connectors + self.output_connectors:
+            connector.remove()
+        
+        # Remove o bloco da cena
+        self.scene().removeItem(self)
