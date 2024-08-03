@@ -29,7 +29,7 @@ class Workspace(QGraphicsScene):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.mode = "POINTER"
+        self.mode = "Point"
         self.line = None
 
     def mousePressEvent(self, event):
@@ -38,10 +38,10 @@ class Workspace(QGraphicsScene):
         or allows item selection if in POINTER mode.
         """
         if event.button() == Qt.LeftButton:
-            if self.mode == "LINE":
+            if self.mode == "Line":
                 self.line = QGraphicsLineItem(QLineF(event.scenePos(), event.scenePos()))
                 self.addItem(self.line)
-            elif self.mode == "POINTER":
+            elif self.mode == "Point":
                 if not self.itemAt(event.scenePos(), QTransform()):
                     self.clearSelection()
                 super().mousePressEvent(event)
@@ -52,7 +52,7 @@ class Workspace(QGraphicsScene):
         """
         Updates the line being drawn as the mouse moves in LINE mode.
         """
-        if self.line and self.mode == "LINE":
+        if self.line and self.mode == "Line":
             new_line = QLineF(self.line.line().p1(), event.scenePos())
             self.line.setLine(new_line)
         else:
@@ -62,7 +62,7 @@ class Workspace(QGraphicsScene):
         """
         Finalizes the line connection or processes item placement when the mouse is released.
         """
-        if self.line and self.mode == "LINE":
+        if self.line and self.mode == "Line":
             self._process_line_end(event)
         super().mouseReleaseEvent(event)
 
@@ -151,7 +151,7 @@ class Workspace(QGraphicsScene):
         Sets the scene operation mode and deselects all items.
         """
         self._deselect_all_items()
-        if mode in ["LINE", "POINTER"]:
+        if mode in ["Line", "Point"]:
             self.mode = mode
         else:
             raise ValueError("Unknown mode: {}".format(mode))

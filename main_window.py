@@ -20,6 +20,8 @@
 from PyQt5.QtWidgets import QMainWindow, QAction, QActionGroup, QHBoxLayout, QWidget, QToolBar, QStatusBar, QMenuBar
 from PyQt5.QtGui import QIcon
 from workspace.viewer import Viewer
+import os
+from functools import partial
 
 class MainWindow(QMainWindow):
 
@@ -27,63 +29,144 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle('BlockVision')
         self.resize(938, 598)
-        self.createActions()
-        self.createActionGroup()
-        self.createToolBars()
-        self.createCentralWidget()
-        # Status bar and menu bar can be added later as needed
-        # self.createStatusBar()
-        # self.createMenuBar()
-        self.connectSignals()
 
-    def createActions(self):
+        self.get_nodes_icons_infos()
+        self.get_interaction_modes_icons_infos()
+        self.get_actions_icons_infos()
+
+        self.create_actions()
+        self.create_action_group()
+        self.create_toolbars()
+        self.create_central_widget()
+        self.createStatusBar()
+        self.createMenuBar()
+        self.connect_signals()
+
+    def get_nodes_icons_infos(self):
+
+        # Caminho para a pasta de icones dos blocos funcionais
+        self.nodes_icons_dir = os.path.join(os.getcwd(), 'icons', 'nodes')
+
+        # Obtem a lista com o nome dos arquivos dos icones dos blocos funcionais (sem extensão)
+        self.nodes_filenames = self.list_files_in_dir(self.nodes_icons_dir)
+
+        # Lista com o nomes capitalizados
+        self.nodes_names = [self.format_string(filename) for filename in self.nodes_filenames]
+
+        # Lista com as ações dos blocos funcionais
+        self.nodes_actions_list = []
+
+    def get_interaction_modes_icons_infos(self):
+
+        # Caminho para a pasta de icones dos blocos funcionais
+        self.interaction_modes_icons_dir = os.path.join(os.getcwd(), 'icons', 'interaction_modes')
+
+        # Obtem a lista com o nome dos arquivos dos icones dos blocos funcionais (sem extensão)
+        self.interaction_modes_filenames = self.list_files_in_dir(self.interaction_modes_icons_dir)
+
+        # Lista com o nomes capitalizados
+        self.interaction_modes_names = [self.format_string(filename) for filename in self.interaction_modes_filenames]
+
+        # Lista com as ações dos blocos funcionais
+        self.interaction_modes_actions_list = []
+
+    def get_actions_icons_infos(self):
+
+        # Caminho para a pasta de icones dos blocos funcionais
+        self.actions_icons_dir = os.path.join(os.getcwd(), 'icons', 'actions')
+
+        # Obtem a lista com o nome dos arquivos dos icones dos blocos funcionais (sem extensão)
+        self.actions_filenames = self.list_files_in_dir(self.actions_icons_dir)
+
+        # Lista com o nomes capitalizados
+        self.actions_names = [self.format_string(filename) for filename in self.actions_filenames]
+
+        # Lista com as ações dos blocos funcionais
+        self.actions_actions_list = []
+
+    def list_files_in_dir(self, directory):
+        try:
+            # Obtém a lista de arquivos e diretórios no diretório especificado
+            files = os.listdir(directory)
+            
+            # Filtra apenas os arquivos, ignorando subdiretórios
+            file_names_with_ext = [file for file in files if os.path.isfile(os.path.join(directory, file))]
+            
+            # Remove a extensão de cada arquivo
+            file_names_without_ext = [os.path.splitext(file)[0] for file in file_names_with_ext]
+            
+            return file_names_without_ext
+        except FileNotFoundError:
+            print(f"Directory not found: {directory}")
+            return []
+        except PermissionError:
+            print(f"Permission denied: {directory}")
+            return []
+
+    def format_string(self, input_string):
+        # Substitui ocorrências de "_" por espaços
+        spaced_string = input_string.replace('_', ' ')
+        
+        # Coloca a primeira letra de cada palavra em maiúsculo
+        capitalized_string = spaced_string.title()
+        
+        return capitalized_string
+
+    def create_actions(self):
         """
         Creates actions used in toolbars and menus.
         These actions represent operations such as creating functional blocks and interaction modes.
         """
-        self.createLoadImageNode = QAction(QIcon('icons/nodes/load_image.svg'), 'Load Image', self)
-        self.createDisplayImageNode = QAction(QIcon('icons/nodes/display_image.svg'), 'Display Image', self)
-        self.createConvolutionKernelNode = QAction(QIcon('icons/nodes/convolution_kernel.svg'), 'Convolution Kernel', self)
-        self.createConvolutionNode = QAction(QIcon('icons/nodes/convolution.svg'), 'Convolution', self)
+        
+        # Para cada arquivo, cria uma ação com o icone associado ao arquivo e com o nome capitalizado
+        for node_filename, node_name in zip(self.nodes_filenames, self.nodes_names):
+            full_icon_path = f'{self.nodes_icons_dir}\\{node_filename}.svg'
+            action = QAction(QIcon(full_icon_path), node_name, self)
+            self.nodes_actions_list.append(action)
 
-        self.selectMoveMode = QAction(QIcon('icons/interaction_modes/point.svg'), 'Select/Move', self)
-        self.connectMode = QAction(QIcon('icons/interaction_modes/line.svg'), 'Connect', self)
-        self.selectMoveMode.setCheckable(True)
-        self.connectMode.setCheckable(True)
-        self.selectMoveMode.setChecked(True)
+        for interaction_mode_filename, interaction_mode_name in zip(self.interaction_modes_filenames, self.interaction_modes_names):
+            full_icon_path = f'{self.interaction_modes_icons_dir}\\{interaction_mode_filename}.svg'
+            action = QAction(QIcon(full_icon_path), interaction_mode_name, self)
+            action.setCheckable(True)
+            self.interaction_modes_actions_list.append(action)
+            if(interaction_mode_name == "Point"):
+                action.setChecked(True)
 
-        self.actionRun = QAction(QIcon('icons/actions/run.svg'), 'Run', self)
-        self.actionOptions = QAction(QIcon('icons/actions/options.svg'), 'Options', self)
+        for action_filename, action_name in zip(self.actions_filenames, self.actions_names):
+            full_icon_path = f'{self.actions_icons_dir}\\{action_filename}.svg'
+            action = QAction(QIcon(full_icon_path), action_name, self)
+            self.actions_actions_list.append(action)
 
-    def createActionGroup(self):
+    def create_action_group(self):
         """
         Creates a group of actions exclusive to interaction modes.
         Only one interaction mode can be selected at a time.
         """
         self.exclusiveSelectionGroup = QActionGroup(self)
-        self.exclusiveSelectionGroup.addAction(self.selectMoveMode)
-        self.exclusiveSelectionGroup.addAction(self.connectMode)
+        for action in self.interaction_modes_actions_list:
+            self.exclusiveSelectionGroup.addAction(action)
 
-    def createToolBars(self):
+    def create_toolbars(self):
         """
         Creates and configures the application's toolbars.
         Adds actions for functional blocks and interaction modes.
         """
         self.nodesToolBar = QToolBar('Nodes ToolBar', self)
-        self.nodesToolBar.addAction(self.createLoadImageNode)
-        self.nodesToolBar.addAction(self.createDisplayImageNode)
-        self.nodesToolBar.addAction(self.createConvolutionKernelNode)
-        self.nodesToolBar.addAction(self.createConvolutionNode)
+        for action in self.nodes_actions_list:
+            self.nodesToolBar.addAction(action)
+
         self.addToolBar(self.nodesToolBar)
 
         self.pointerToolbar = QToolBar('Interaction Modes and Actions', self)
-        self.pointerToolbar.addAction(self.selectMoveMode)
-        self.pointerToolbar.addAction(self.connectMode)
-        self.pointerToolbar.addAction(self.actionRun)
-        self.pointerToolbar.addAction(self.actionOptions)
+        for action in self.interaction_modes_actions_list:
+            self.pointerToolbar.addAction(action)
+
+        for action in self.actions_actions_list:
+            self.pointerToolbar.addAction(action)
+
         self.addToolBar(self.pointerToolbar)
 
-    def createCentralWidget(self):
+    def create_central_widget(self):
         """
         Creates the central widget of the window and adds the Viewer to display and interact with the block diagram.
         """
@@ -109,17 +192,21 @@ class MainWindow(QMainWindow):
         self.menuBar = QMenuBar(self)
         self.setMenuBar(self.menuBar)
 
-    def connectSignals(self):
+    def connect_signals(self):
         """
         Connects actions to their corresponding functions for handling blocks and interaction modes.
         """
-        self.createLoadImageNode.triggered.connect(lambda: self.viewer.addItem(self.createLoadImageNode, 'icons/nodes/load_image.svg'))
-        self.createDisplayImageNode.triggered.connect(lambda: self.viewer.addItem(self.createDisplayImageNode, 'icons/nodes/display_image.svg'))
-        self.createConvolutionKernelNode.triggered.connect(lambda: self.viewer.addItem(self.createConvolutionKernelNode, 'icons/nodes/convolution_kernel.svg'))
-        self.createConvolutionNode.triggered.connect(lambda: self.viewer.addItem(self.createConvolutionNode, 'icons/nodes/convolution.svg'))
 
-        self.selectMoveMode.triggered.connect(lambda: self.viewer.scene.setMode("POINTER"))
-        self.connectMode.triggered.connect(lambda: self.viewer.scene.setMode("LINE"))
+        # Aqui o partial foi necessario para poder invocar os metodos com argumentos
+        for node, node_filename in zip(self.nodes_actions_list, self.nodes_filenames):
+            icon_path = os.path.join(self.nodes_icons_dir, f'{self.nodes_icons_dir}\\{node_filename}.svg')
+            node.triggered.connect(partial(self.viewer.addItem, node, icon_path))
 
-        self.actionRun.triggered.connect(lambda: self.viewer.run())
-        self.actionOptions.triggered.connect(lambda: self.viewer.openOptionsWindow())
+        for interaction_mode, interaction_mode_name in zip(self.interaction_modes_actions_list, self.interaction_modes_names):
+            interaction_mode.triggered.connect(partial(self.viewer.scene.setMode, interaction_mode_name))
+
+        for action, action_name in zip(self.actions_actions_list, self.actions_names):
+            if action_name == "Run":
+                action.triggered.connect(lambda: self.viewer.run())
+            elif action_name == "Options":
+                action.triggered.connect(lambda: self.viewer.openOptionsWindow())
