@@ -18,10 +18,13 @@
 #       de interação e executar ações.
 
 from PyQt5.QtWidgets import QMainWindow, QAction, QActionGroup, QHBoxLayout, QWidget, QToolBar, QStatusBar, QMenuBar
+from PyQt5.QtWidgets import QVBoxLayout, QFrame, QLineEdit, QSizePolicy, QStyle
+from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QIcon
 from workspace.viewer import Viewer
 import os
 from functools import partial
+
 
 class MainWindow(QMainWindow):
 
@@ -151,30 +154,51 @@ class MainWindow(QMainWindow):
         Creates and configures the application's toolbars.
         Adds actions for functional blocks and interaction modes.
         """
-        self.nodesToolBar = QToolBar('Nodes ToolBar', self)
+        self.nodes_toolbar = QToolBar('Nodes ToolBar', self)
+        
+        self.line_edit = QLineEdit(self)
+        self.line_edit.setPlaceholderText("Search Blocks...")
+        self.line_edit.setFixedWidth(150)  # Define a largura fixa para 200 pixels
+        self.line_edit.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Expanding)  # Permite a expansão vertical
+        self.nodes_toolbar.addWidget(self.line_edit)
+
         for action in self.nodes_actions_list:
-            self.nodesToolBar.addAction(action)
+            self.nodes_toolbar.addAction(action)
 
-        self.addToolBar(self.nodesToolBar)
 
-        self.pointerToolbar = QToolBar('Interaction Modes and Actions', self)
+        self.addToolBar(self.nodes_toolbar)
+
+        self.addToolBarBreak()
+
+        self.interaction_modes_toolbar = QToolBar('Interaction Modes ToolBar', self)
         for action in self.interaction_modes_actions_list:
-            self.pointerToolbar.addAction(action)
+            self.interaction_modes_toolbar.addAction(action)
+        self.addToolBar(self.interaction_modes_toolbar)
 
+        self.actions_toolbar = QToolBar('Actions ToolBar', self)
         for action in self.actions_actions_list:
-            self.pointerToolbar.addAction(action)
+            self.actions_toolbar.addAction(action)
 
-        self.addToolBar(self.pointerToolbar)
+        self.addToolBar(self.actions_toolbar)
 
     def create_central_widget(self):
         """
         Creates the central widget of the window and adds the Viewer to display and interact with the block diagram.
         """
-        self.centralWidget = QWidget(self)
-        self.horizontalLayout = QHBoxLayout(self.centralWidget)
-        self.viewer = Viewer(self.centralWidget)
-        self.horizontalLayout.addWidget(self.viewer)
-        self.setCentralWidget(self.centralWidget)
+        self.central_widget = QWidget(self)
+        
+        # Layout vertical para o widget central
+        self.central_widget_vertical_layout = QVBoxLayout(self.central_widget)
+                    
+        # Criação e adição do Viewer
+        self.viewer = Viewer()
+        self.central_widget_vertical_layout.addWidget(self.viewer)
+        
+        # Configura o layout do widget central
+        self.central_widget.setLayout(self.central_widget_vertical_layout)
+        
+        # Define o widget central
+        self.setCentralWidget(self.central_widget)
 
     def createStatusBar(self):
         """
@@ -210,3 +234,11 @@ class MainWindow(QMainWindow):
                 action.triggered.connect(lambda: self.viewer.run())
             elif action_name == "Options":
                 action.triggered.connect(lambda: self.viewer.openOptionsWindow())
+
+        self.line_edit.textChanged.connect(self.filter_actions)
+
+    def filter_actions(self):
+        
+        filter_text = self.line_edit.text().lower()
+        for node_name, node in zip(self.nodes_names, self.nodes_actions_list):
+            node.setVisible(filter_text in node_name.lower())
