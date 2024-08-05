@@ -21,6 +21,7 @@ from nodes.display_image import DisplayImage
 from nodes.convolution_kernel import ConvolutionKernel
 from nodes.convolution import Convolution
 from nodes.connector import Connector
+from nodes.add import Add
 
 class Workspace(QGraphicsScene):
     """
@@ -114,6 +115,9 @@ class Workspace(QGraphicsScene):
         elif end_item.getType() == "Display Image" and len(end_item.getInputConnectors()) >= 1:
             print("Display Image block can only have one input")
             return False
+        elif end_item.getType() == "Add" and len(end_item.getInputConnectors()) >= 2:
+            print("Sum images block can only have two inputs")
+            return False
         elif self.checkBlockCollision(start_item, end_item):
             print("Blocks collide; connector will not be added")
             return False
@@ -127,7 +131,8 @@ class Workspace(QGraphicsScene):
             "Load Image": LoadImage,
             "Display Image": DisplayImage,
             "Convolution Kernel": ConvolutionKernel,
-            "Convolution": Convolution
+            "Convolution": Convolution,
+            "Add": Add
         }
 
         if node_type in node_classes:

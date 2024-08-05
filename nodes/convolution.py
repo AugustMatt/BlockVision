@@ -46,10 +46,10 @@ class Convolution(Node, ImageNode):
         # Verifica se há dois conectores de entrada
         if len(input_connectors) == 2:
             try:
-                load_image_node, convolution_kernel_node = self._get_items_from_connectors(input_connectors)
+                image_node, convolution_kernel_node = self._get_items_from_connectors(input_connectors)
                 
-                if load_image_node and convolution_kernel_node:
-                    image = load_image_node.image
+                if image_node and convolution_kernel_node:
+                    image = image_node.image
                     convolution_kernel = convolution_kernel_node.getConvolutionKernel()
 
                     # Verifica se a imagem e o kernel são válidos
@@ -68,16 +68,16 @@ class Convolution(Node, ImageNode):
         """
         Retrieves the connected image and kernel nodes.
         """
-        load_image_node = connectors[0].getSrc()
+        image_node = connectors[0].getSrc()
         convolution_kernel_node = connectors[1].getSrc()
 
         # Verifica se os tipos dos blocos estão trocados (dependendo da ordem de conexão que foi feita)
-        if isinstance(load_image_node, ConvolutionKernel) and isinstance(convolution_kernel_node, ImageNode):
-            load_image_node, convolution_kernel_node = convolution_kernel_node, load_image_node
+        if isinstance(image_node, ConvolutionKernel) and isinstance(convolution_kernel_node, ImageNode):
+            image_node, convolution_kernel_node = convolution_kernel_node, image_node
 
         # Verifica se os tipos dos blocos são validos para realizar a convolução
-        if isinstance(load_image_node, ImageNode) and isinstance(convolution_kernel_node, ConvolutionKernel):
-            return load_image_node, convolution_kernel_node
+        if isinstance(image_node, ImageNode) and isinstance(convolution_kernel_node, ConvolutionKernel):
+            return image_node, convolution_kernel_node
         else:
             print("Blocos de entrada inválidos para convolução")
             return None, None

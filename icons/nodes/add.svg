@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" version="1.1">
+ <metadata id="metadata90">image/svg+xmlGnome Symbolic Icon Theme</metadata>
+ <title id="title9167">Gnome Symbolic Icon Theme</title>
+ <g class="layer">
+  <title>Layer 1</title>
+  <path d="m31.22,16.01a14.98,14.98 0 1 1 -29.95,0a14.98,14.98 0 1 1 29.95,0z" fill="#d3d7cf" id="path3039" stroke="#46443f" stroke-miterlimit="4" stroke-width="2"/>
+  <text fill="#000000" font-family="Sans" font-size="40px" font-style="normal" font-weight="normal" id="text4369" letter-spacing="0px" word-spacing="0px" x="-5.8" xml:space="preserve" y="10.39"/>
+  <path d="m8.74,14.03l5.12,0l0,-5.12l4.82,0l0,5.12l5.12,0l0,4.82l-5.12,0l0,5.12l-4.82,0l0,-5.12l-5.12,0z" fill="#ff7f00" id="svg_2" stroke="#46443f"/>
+ </g>
+</svg>
