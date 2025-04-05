@@ -72,7 +72,3 @@ Contribuições são bem-vindas! Se você deseja contribuir, por favor siga os p
     git push origin minha-nova-funcionalidade
 
 5. Crie um pull request.
-
-## Licença
-
-Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
